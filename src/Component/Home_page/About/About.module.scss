@@ -1,0 +1,188 @@
+@import "../../../style/main.scss";
+
+.about {
+  position: relative;
+  @include flexBetween(column);
+  gap: 2rem;
+  margin: 6rem 0;
+
+  .sections {
+    @include flexBetween(row);
+    gap: 3rem;
+    button {
+      padding: 10px 25px;
+      border-radius: 5px;
+      border: none;
+      color: $gray-color;
+      text-transform: capitalize;
+      font-size: 1.2rem;
+      font-weight: bold;
+      cursor: pointer;
+
+      &.active {
+        background-color: $main-color;
+      }
+    }
+  }
+  .container {
+    .personal_info {
+      h1 {
+        font-size: 3rem;
+        color: white;
+        text-transform: capitalize;
+        margin-bottom: 1rem;
+        position: relative;
+        transition: 0.5s;
+      }
+
+      p {
+        color: #777;
+        line-height: 1.5;
+        font-size: 18px;
+        margin-bottom: 2rem;
+        position: relative;
+        transition: 0.5s;
+      }
+
+      .links {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2.5rem;
+
+        .link {
+          background-color: #2e2e2e;
+          width: 290px;
+          max-width: 100%;
+          height: 80px;
+          border-radius: 5px;
+          padding: 35px;
+          position: relative;
+
+          h6 {
+            color: #777;
+            text-transform: capitalize;
+            font-size: 1.2rem;
+            padding-bottom: 1rem;
+          }
+
+          > a {
+            color: $white-color;
+            transition: 0.5s;
+
+            &:hover {
+              color: $main-color;
+              padding-left: 1rem;
+            }
+          }
+
+          .social_links {
+            @include flexBetween(row);
+            a {
+              color: #777;
+              background-color: $white-color;
+              width: 40px;
+              height: 40px;
+              border-radius: 50%;
+              font-size: 25px;
+              @include flexCenter();
+
+              img {
+                width: 50px;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .skils_container {
+      @include flexCenter();
+      flex-wrap: wrap;
+      gap: 3rem;
+
+      .skil {
+        background-color: #2e2e2e;
+        width: 150px;
+        height: 150px;
+        @include flexCenter();
+        position: relative;
+
+        img {
+          width: 50px;
+          filter: grayscale(1);
+          transition: 0.5s;
+        }
+        &:hover {
+          img {
+            filter: none;
+          }
+        }
+
+        &::before {
+          content: "";
+          position: absolute;
+          @include flexCenter();
+          top: -15px;
+          font-size: 16px;
+          color: $gray-color;
+          width: 100px;
+          height: 0;
+          padding: 5px 10px;
+          font-weight: bold;
+          border-radius: 5px;
+          text-transform: capitalize;
+          transition: 0.5s ease;
+        }
+        &:hover::before {
+          width: 100px;
+          height: 20px;
+          background-color: $white-color;
+          content: attr(data-name);
+        }
+        &:hover {
+          color: $main-color;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .about {
+    .container {
+      .personal_info {
+        @include flexBetween(column);
+        justify-content: center;
+      }
+    }
+  }
+}
+@media (max-width: 1300px) {
+  .about {
+    .container {
+      > img {
+        display: none;
+      }
+      .personal_info {
+        h1 {
+          font-size: 2.5rem;
+        }
+
+        p {
+          text-align: center;
+          font-size: 16px;
+        }
+
+        .links {
+          .link {
+            max-width: 230px;
+            .social_links {
+              @include flexBetween(row);
+              gap: 1rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}

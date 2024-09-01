@@ -1,0 +1,267 @@
+@import "../../style/main.scss";
+
+header {
+  position: fixed;
+  border-bottom: 1px solid #333;
+  background-color: black;
+  width: 100%;
+  z-index: 999;
+  top: 0;
+  transition: 0.5s;
+  .header_container {
+    @include flexBetween(row);
+    width: calc(100% - 5rem);
+    margin: 0 auto;
+    overflow: hidden;
+
+    .logo {
+      color: $white-color;
+      text-transform: capitalize;
+      font-weight: bold;
+      font-size: 2.5rem;
+      padding-right: 4rem;
+      border-right: 1px solid #333;
+      height: 90px;
+      @include flexCenter();
+    }
+
+    .navbar {
+      @include flexBetween(row);
+      gap: 3rem;
+
+      li {
+        a {
+          color: $white-color;
+          text-transform: uppercase;
+          font-size: 1.2rem;
+          transition: 0.5s;
+        }
+        &:hover {
+          a {
+            color: $main-color;
+          }
+        }
+      }
+    }
+
+    .contact {
+      @include flexBetween(row);
+      gap: 1rem;
+      padding-left: 4rem;
+      border-left: 1px solid #333;
+      height: 90px;
+
+      button {
+        @include flexCenter();
+        background-color: $main-color;
+        padding: 12px 1.5rem;
+        border: none;
+        text-transform: capitalize;
+        border-radius: 5px;
+        font-size: 1rem;
+        position: relative;
+        cursor: pointer;
+
+        &::before {
+          content: "";
+          position: absolute;
+          width: 100%;
+          height: 0;
+          background-color: black;
+          opacity: 0.3;
+          transition: 0.5s;
+          top: 0;
+        }
+        &:hover::before {
+          height: 100%;
+        }
+        a {
+          color: black;
+        }
+      }
+
+      .info {
+        @include flexCenter();
+        background-color: $white-color;
+        padding: 10px 15px;
+        border-radius: 5px;
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+
+      .info_box {
+        background-color: black;
+        position: fixed;
+        top: 0;
+        height: 100vh;
+        width: 300px;
+        right: -50rem;
+        transition: all 0.4s ease;
+        z-index: 999;
+
+        .close {
+          @include flexCenter();
+          width: fit-content;
+          position: absolute;
+          right: 15px;
+          top: 15px;
+          background-color: $main-color;
+          padding: 5px 10px;
+          font-size: 2rem;
+          cursor: pointer;
+        }
+
+        .info_container {
+          padding: 25px;
+          position: absolute;
+          top: 10%;
+
+          > a {
+            color: $white-color;
+            text-transform: capitalize;
+            font-weight: bold;
+            font-size: 2.5rem;
+          }
+          p {
+            color: #777;
+            font-size: 13px;
+            margin-top: 1rem;
+            line-height: 2;
+          }
+
+          .contacts_link {
+            margin: 3rem 0;
+            @include flexBetween(column);
+            align-items: flex-start;
+            gap: 1.5rem;
+            div {
+              h5 {
+                font-weight: bold;
+                text-transform: uppercase;
+                color: #777;
+                font-size: 1.2rem;
+                padding-bottom: 10px;
+              }
+              a {
+                color: $white-color;
+              }
+            }
+          }
+
+          .social_links {
+            @include flexBetween(row);
+            a {
+              color: #777;
+              background-color: $main-color;
+              width: 50px;
+              height: 50px;
+              border-radius: 50%;
+              font-size: 25px;
+              @include flexCenter();
+
+              img {
+                width: 50px;
+              }
+            }
+          }
+
+          .contact {
+            margin: 3rem 0;
+            padding-left: 0;
+            border-left-width: 0;
+
+            button {
+              width: 100%;
+            }
+          }
+        }
+        &.active {
+          right: 0;
+        }
+      }
+    }
+
+    .bars {
+      display: none;
+      color: $white-color;
+      font-size: 1.5rem;
+    }
+  }
+}
+
+@media (max-width: 1160px) {
+  header {
+    .header_container {
+      .logo {
+        font-size: 1.5rem;
+        padding-right: 0;
+        border: 0;
+      }
+
+      .navbar {
+        @include flexBetween(column);
+        position: absolute;
+        left: -150rem;
+        top: 100%;
+        width: 100%;
+        background-color: black;
+        align-items: flex-start;
+        padding: 20px;
+        gap: 2rem;
+        transition: left 0.5s;
+        z-index: 999;
+
+        &.active {
+          left: 0;
+        }
+        
+        li {
+          border-bottom: 1px solid #eee;
+          width: 100%;
+          padding-bottom: 15px;
+        }
+      }
+
+      .contact {
+        padding: 0;
+        border: 0;
+        button {
+          @include flexCenter();
+          background-color: $main-color;
+          padding: 8px 10px;
+          border: none;
+          border: 0;
+        }
+
+        .info {
+          @include flexCenter();
+          background-color: $white-color;
+          padding: 5px 10px;
+        }
+      }
+
+      .bars {
+        display: block;
+        @include flexBetween(column);
+        gap: 7px;
+        div {
+          width: 35px;
+          height: 2px;
+          background-color: $white-color;
+          transition: 0.5s;
+        }
+        &.active {
+          .top {
+            transform: rotate(45deg) translateY(13px);
+          }
+          .middle {
+            opacity: 0;
+          }
+          .bottom {
+            transform: rotate(-45deg) translateY(-13px);
+          }
+        }
+      }
+    }
+  }
+}

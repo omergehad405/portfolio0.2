@@ -1,0 +1,150 @@
+@import "../../style/main.scss";
+
+.contact_page {
+  position: relative;
+  @include flexBetween(column);
+  gap: 2rem;
+  margin: 6rem 0;
+  .container {
+    background-color: transparent;
+    .contact_form {
+      background-color: $gray-color;
+      max-width: calc(100% - 10rem);
+      width: 750px;
+      padding: 5rem;
+      @include flexBetween(column);
+      align-items: flex-start;
+
+      h1 {
+        color: $white-color;
+        font-size: 2rem;
+        text-transform: capitalize;
+        padding-bottom: 2rem;
+      }
+      form {
+        width: 100%;
+        @include flexBetween(column);
+        gap: 2rem;
+
+        .error_msg {
+          color: red;
+        }
+
+        input,
+        textArea {
+          position: relative;
+          width: 100%;
+          border: none;
+          outline: none;
+          background-color: #2e2e2e;
+          padding: 15px 0 15px 25px;
+          border-radius: 5px;
+          margin-top: 15px;
+          color: $white-color;
+
+          &:focus {
+            border: 2px solid $main-color;
+          }
+
+          &.inputError {
+            border: 1px solid red;
+          }
+        }
+        textArea {
+          min-height: 150px;
+        }
+
+        button {
+          border: none;
+          background-color: $main-color;
+          padding: 10px 25px;
+          text-transform: capitalize;
+          cursor: pointer;
+          width: 250px;
+
+          a {
+            color: $gray-color;
+            font-size: 1rem;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+    .contact_info {
+      padding: 3rem;
+      background-color: $gray-color;
+      > h1 {
+        color: $white-color;
+        font-size: 1.5rem;
+        text-transform: capitalize;
+        padding-bottom: 2rem;
+      }
+      .links {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2.5rem;
+
+        .link {
+          background-color: #2e2e2e;
+          width: 290px;
+          max-width: calc(100% - 4rem);
+          height: 70px;
+          border-radius: 5px;
+          padding: 35px;
+          position: relative;
+
+          h6 {
+            color: #777;
+            text-transform: capitalize;
+            font-size: 1.2rem;
+            padding-bottom: 1rem;
+          }
+
+          > a {
+            color: $white-color;
+            transition: 0.5s;
+
+            &:hover {
+              color: $main-color;
+              padding-left: 1rem;
+            }
+          }
+
+          .social_links {
+            @include flexBetween(row);
+            a {
+              color: #777;
+              background-color: $white-color;
+              width: 40px;
+              height: 40px;
+              border-radius: 50%;
+              font-size: 25px;
+              @include flexCenter();
+
+              img {
+                width: 50px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .contact_page {
+    .container {
+      .contact_form {
+        max-width: 300px;
+      }
+      .contact_info {
+        .links {
+          .link {
+            width: calc(100% - 4rem);
+          }
+        }
+      }
+    }
+  }
+}

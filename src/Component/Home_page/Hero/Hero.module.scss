@@ -1,0 +1,223 @@
+@import "../../../style/main.scss";
+
+.hero {
+  background-color: $second-color;
+  height: 100vh;
+  position: relative;
+
+  .hero_container {
+    @include flexBetween(row);
+    justify-content: space-between;
+    position: relative;
+    top: 12rem;
+    width: calc(100% - 5rem);
+    margin: 0 auto;
+
+    .left {
+      text-align: center;
+      @include flexBetween(column);
+      gap: 15rem;
+
+      .phone {
+        @include flexBetween(column);
+        a {
+          transform: rotate(90deg);
+          color: $white-color;
+          @include flexCenter();
+          gap: 1rem;
+
+          i {
+            transform: rotate(-90deg);
+          }
+        }
+      }
+
+      .scroll {
+        @include flexBetween(column);
+        gap: 5rem;
+        p {
+          transform: rotate(90deg);
+          color: #777;
+          text-transform: uppercase;
+          font-size: 1.2rem;
+        }
+      }
+    }
+
+    .center {
+      @include flexBetween(row);
+      gap: 5rem;
+      .info {
+        div:nth-child(1) {
+          border-bottom: 1px solid $white-color;
+          padding-bottom: 2rem;
+          margin-bottom: 5rem;
+          a {
+            color: $white-color;
+            line-height: 1.5;
+            font-size: 1.7rem;
+            text-transform: capitalize;
+            cursor: pointer;
+            transition: 0.5s;
+
+            &:hover {
+              color: $main-color;
+            }
+
+            i {
+              transform: rotate(-45deg);
+              padding-left: 15px;
+            }
+          }
+        }
+
+        .hero_title {
+          @include flexBetween(column);
+          color: $white-color;
+          font-size: 3.5rem;
+          margin-bottom: 5rem;
+          h2 {
+            text-transform: capitalize;
+          }
+          h3 {
+            position: relative;
+            color: black;
+            -webkit-text-stroke: 5px #2d2d2d;
+            letter-spacing: 2px;
+            text-transform: capitalize;
+
+            &::before {
+              content: attr(data-text);
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 0;
+              height: 100%;
+              color: $main-color;
+              -webkit-text-stroke: 0px #2d2d2d;
+              overflow: hidden;
+              animation: fillColor 5s linear infinite;
+            }
+          }
+        }
+
+        button {
+          border: none;
+          border-radius: 5px;
+          background-color: $main-color;
+          text-transform: capitalize;
+          font-size: 1.5rem;
+          padding: 5px 10px;
+
+          a {
+            color: $white-color;
+          }
+        }
+      }
+
+      img {
+        width: 100%;
+        max-width: 450px;
+      }
+    }
+
+    .right {
+      text-align: center;
+      @include flexBetween(column);
+      gap: 5rem;
+
+      > div {
+        @include flexBetween(column);
+        gap: 5rem;
+
+        p {
+          transform: rotate(90deg);
+          color: #777;
+          text-transform: uppercase;
+          font-size: 1.2rem;
+        }
+      }
+
+      .social_links {
+        @include flexBetween(column);
+        gap: 1rem;
+        a {
+          color: #777;
+          background-color: $main-color;
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          font-size: 25px;
+          @include flexCenter();
+
+          img {
+            max-width: 50px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@keyframes fillColor {
+  0%,
+  10%,
+  100% {
+    width: 0;
+  }
+  70%,
+  90% {
+    width: 100%;
+  }
+}
+
+@media (max-width: 991px) {
+  .hero {
+    margin-bottom: 10rem;
+    .hero_container {
+      top: 10rem;
+
+      .center {
+        gap: 5rem;
+
+        .info {
+          div:nth-child(1) {
+            a {
+              font-size: 1.2rem;
+            }
+          }
+
+          .hero_title {
+            font-size: 3rem;
+          }
+        }
+
+        img {
+          display: none;
+        }
+      }
+    }
+  }
+}
+@media (max-width: 768px) {
+  .hero {
+    .hero_container {
+      justify-content: center;
+      .left,
+      .right {
+        display: none;
+      }
+    }
+  }
+}
+@media (max-width: 1300px) {
+  .hero {
+    .container {
+      top: 10rem;
+      .left,
+      .right {
+        display: none;
+      }
+    }
+  }
+}

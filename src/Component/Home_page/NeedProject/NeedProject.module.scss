@@ -1,0 +1,172 @@
+@import "../../../style/main.scss";
+
+.Nproject {
+  margin: 5rem 0;
+  width: 100%;
+  background-color: $gray-color;
+  position: relative;
+
+  .Nproject_container {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 5rem;
+
+    .info {
+      .title {
+        position: relative;
+        margin-left: 4rem;
+
+        span {
+          font-size: 1.3rem;
+        }
+        &::after {
+          width: 0;
+        }
+        &::before {
+          left: -4rem;
+          width: 60px;
+        }
+      }
+      h1 {
+        color: $white-color;
+        font-size: 4rem;
+        text-transform: capitalize;
+        padding: 2rem 0;
+        border-bottom: 2px solid #777;
+        transition: 0.5s;
+
+        &:hover {
+          border-bottom: 2px solid $main-color;
+        }
+      }
+      .links {
+        .link {
+          transition: 0.5;
+          display: flex;
+          align-items: center;
+          border-bottom: 2px solid #777;
+          padding: 35px 0;
+          position: relative;
+          gap: 2rem;
+
+          .link_icon {
+            background-color: $main-color;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            @include flexCenter();
+            font-size: 2rem;
+          }
+          .link_info {
+            h6 {
+              color: #777;
+              text-transform: capitalize;
+              font-size: 1.2rem;
+              padding-bottom: 1rem;
+            }
+
+            a {
+              color: $white-color;
+              transition: 0.5s;
+
+              &:hover {
+                color: $main-color;
+                padding-left: 1rem;
+              }
+            }
+          }
+
+          &:hover {
+            border-bottom: 2px solid $main-color;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1176px) {
+  .Nproject {
+    .Nproject_container {
+      .image {
+        display: none;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .Nproject {
+    .Nproject_container {
+      justify-content: center;
+      padding: 5rem;
+      .info {
+        .title {
+          position: relative;
+          margin-left: 4rem;
+
+          span {
+            font-size: 1.3rem;
+          }
+          &::after {
+            width: 0;
+          }
+          &::before {
+            left: -4rem;
+            width: 60px;
+          }
+        }
+        h1 {
+          font-size: 1.7rem;
+
+          &:hover {
+            border-bottom: 2px solid $main-color;
+          }
+        }
+        .links {
+          .link {
+            transition: 0.5;
+            display: flex;
+            align-items: center;
+            border-bottom: 2px solid #777;
+            padding: 35px 0;
+            position: relative;
+            gap: 2rem;
+
+            .link_icon {
+              background-color: $main-color;
+              width: 70px;
+              height: 70px;
+              border-radius: 50%;
+              @include flexCenter();
+              font-size: 2rem;
+            }
+            .link_info {
+              h6 {
+                color: #777;
+                text-transform: capitalize;
+                font-size: 1.2rem;
+                padding-bottom: 1rem;
+              }
+
+              a {
+                color: $white-color;
+                transition: 0.5s;
+
+                &:hover {
+                  color: $main-color;
+                  padding-left: 1rem;
+                }
+              }
+            }
+
+            &:hover {
+              border-bottom: 2px solid $main-color;
+            }
+          }
+        }
+      }
+    }
+  }
+}
