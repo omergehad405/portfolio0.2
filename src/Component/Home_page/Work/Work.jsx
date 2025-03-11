@@ -77,12 +77,12 @@ const projects = [
   {
     num: "08",
     category: "e-commerce",
-    title: "naturio",
-    description: "full e-commerce organic store website ",
-    stack: [{ name: "react" }, { name: "css" }],
-    image: "./Projects/organic-store.png",
-    live: "https://omergehad405.github.io/organic_store/",
-    github: "https://github.com/omergehad405/organic_store",
+    title: "CeramicShop",
+    description: "full e-commerce Ceramic products website ",
+    stack: [{ name: "react" }, { name: "tailwind" }],
+    image: "./Projects/CeramicShop.png",
+    live: "https://omergehad405.github.io/CeramicShop/",
+    github: "https://github.com/omergehad405/CeramicShop",
   },
 ];
 
