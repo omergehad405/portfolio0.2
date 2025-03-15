@@ -1,0 +1,98 @@
+@import "../../../style/main.scss";
+
+.services {
+  position: relative;
+  @include flexBetween(column);
+  text-align: center;
+  gap: 2rem;
+  margin: 6rem 0;
+
+  .container {
+    @include flexCenter();
+    flex-direction: column;
+    gap: 5rem;
+
+    .text {
+      text-align: center;
+      color: $white-color;
+      font-size: 1.5rem;
+      line-height: 2;
+      transition: 0.5s;
+      position: relative;
+      padding-bottom: 2rem;
+
+      &::after {
+        content: "";
+        position: absolute;
+        width: 60%;
+        height: 2px;
+        background-color: $white-color;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+
+    .services_container {
+      @include flexCenter();
+      flex-wrap: wrap;
+      gap: 25px;
+
+      .service {
+        max-width: calc(100% - 7rem);
+        width: 320px;
+        height: 200px;
+        padding: 1.5rem;
+        background-color: rgba(255, 255, 255, 0.222);
+        border-radius: 10px;
+        position: relative;
+        user-select: none;
+
+        &::before {
+          content: "";
+          background-color: $main-color;
+          position: absolute;
+          width: 0;
+          height: 5px;
+          border-top-left-radius: 10px;
+          border-top-right-radius: 10px;
+          top: 0px;
+          left: 50%;
+          transform: translateX(-50%);
+          transition: 0.5s;
+        }
+
+        &:hover::before {
+          width: 100%;
+        }
+
+        .service_title {
+          text-align: center;
+          color: $main-color;
+          font-size: 1.2rem;
+          text-transform: capitalize;
+        }
+
+        .service_info {
+          font-weight: bold;
+          text-transform: capitalize;
+          color: #f2f2f2;
+          line-height: 1.5;
+          padding-top: 2rem;
+          text-align: left;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .services {
+    .container {
+      transform: scale(1);
+      .text {
+        font-size: 1rem;
+      }
+    }
+  }
+}

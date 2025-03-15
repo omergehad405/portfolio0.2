@@ -1,0 +1,291 @@
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  list-style: none;
+  font-family: "Playpen Sans", cursive;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+html ::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+html ::-webkit-scrollbar-thumb {
+  background: #aad302;
+  border-radius: 10px;
+}
+html ::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px #141410;
+  border-radius: 5px;
+}
+
+body {
+  background-color: #141410;
+}
+
+.title {
+  position: relative;
+}
+.title span {
+  color: #ffffff;
+  text-transform: capitalize;
+  font-weight: bold;
+  font-size: 1rem;
+  color: #aad302;
+}
+.title::before, .title::after {
+  content: "";
+  position: absolute;
+  width: 70px;
+  height: 3px;
+  background-color: #aad302;
+  bottom: 10px;
+}
+.title::before {
+  left: -5rem;
+}
+.title::after {
+  right: -5rem;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5rem;
+  max-width: calc(100% - 9rem);
+  width: 70%;
+  min-height: 65vh;
+  background-color: #1d1d1d;
+  padding: 3rem;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+@media (max-width: 1300px) {
+  .container {
+    flex-direction: column;
+    width: 100%;
+    margin: 0 auto;
+  }
+}
+.hero {
+  background-color: #141410;
+  height: 100vh;
+  position: relative;
+}
+.hero .hero_container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  justify-content: space-between;
+  position: relative;
+  top: 12rem;
+  width: calc(100% - 5rem);
+  margin: 0 auto;
+}
+.hero .hero_container .left {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  gap: 15rem;
+}
+.hero .hero_container .left .phone {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+}
+.hero .hero_container .left .phone a {
+  transform: rotate(90deg);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+.hero .hero_container .left .phone a i {
+  transform: rotate(-90deg);
+}
+.hero .hero_container .left .scroll {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  gap: 5rem;
+}
+.hero .hero_container .left .scroll p {
+  transform: rotate(90deg);
+  color: #777;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+}
+.hero .hero_container .center {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  gap: 5rem;
+}
+.hero .hero_container .center .info div:nth-child(1) {
+  border-bottom: 1px solid #ffffff;
+  padding-bottom: 2rem;
+  margin-bottom: 5rem;
+}
+.hero .hero_container .center .info div:nth-child(1) a {
+  color: #ffffff;
+  line-height: 1.5;
+  font-size: 1.7rem;
+  text-transform: capitalize;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.hero .hero_container .center .info div:nth-child(1) a:hover {
+  color: #aad302;
+}
+.hero .hero_container .center .info div:nth-child(1) a i {
+  transform: rotate(-45deg);
+  padding-left: 15px;
+}
+.hero .hero_container .center .info .hero_title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  color: #ffffff;
+  font-size: 3.5rem;
+  margin-bottom: 5rem;
+}
+.hero .hero_container .center .info .hero_title h2 {
+  text-transform: capitalize;
+}
+.hero .hero_container .center .info .hero_title h3 {
+  position: relative;
+  color: black;
+  -webkit-text-stroke: 5px #2d2d2d;
+  letter-spacing: 2px;
+  text-transform: capitalize;
+}
+.hero .hero_container .center .info .hero_title h3::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  color: #aad302;
+  -webkit-text-stroke: 0px #2d2d2d;
+  overflow: hidden;
+  animation: fillColor 5s linear infinite;
+}
+.hero .hero_container .center .info button {
+  border: none;
+  border-radius: 5px;
+  background-color: #aad302;
+  text-transform: capitalize;
+  font-size: 1.5rem;
+  padding: 5px 10px;
+}
+.hero .hero_container .center .info button a {
+  color: #ffffff;
+}
+.hero .hero_container .center img {
+  width: 100%;
+  max-width: 450px;
+}
+.hero .hero_container .right {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  gap: 5rem;
+}
+.hero .hero_container .right > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  gap: 5rem;
+}
+.hero .hero_container .right > div p {
+  transform: rotate(90deg);
+  color: #777;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+}
+.hero .hero_container .right .social_links {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  gap: 1rem;
+}
+.hero .hero_container .right .social_links a {
+  color: #777;
+  background-color: #aad302;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero .hero_container .right .social_links a img {
+  max-width: 50px;
+}
+
+@keyframes fillColor {
+  0%, 10%, 100% {
+    width: 0;
+  }
+  70%, 90% {
+    width: 100%;
+  }
+}
+@media (max-width: 991px) {
+  .hero {
+    margin-bottom: 10rem;
+  }
+  .hero .hero_container {
+    top: 10rem;
+  }
+  .hero .hero_container .center {
+    gap: 5rem;
+  }
+  .hero .hero_container .center .info div:nth-child(1) a {
+    font-size: 1.2rem;
+  }
+  .hero .hero_container .center .info .hero_title {
+    font-size: 3rem;
+  }
+  .hero .hero_container .center img {
+    display: none;
+  }
+}
+@media (max-width: 768px) {
+  .hero .hero_container {
+    justify-content: center;
+  }
+  .hero .hero_container .left,
+  .hero .hero_container .right {
+    display: none;
+  }
+}
+@media (max-width: 1300px) {
+  .hero .container {
+    top: 10rem;
+  }
+  .hero .container .left,
+  .hero .container .right {
+    display: none;
+  }
+}/*# sourceMappingURL=Hero.module.css.map */
