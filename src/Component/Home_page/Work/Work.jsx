@@ -75,7 +75,7 @@ const projects = [
     github: "https://github.com/omergehad405/Food",
   },
   {
-    num: "08",
+      num: "08",
     category: "e-commerce",
     title: "CeramicShop",
     description: "full e-commerce Ceramic products website ",
