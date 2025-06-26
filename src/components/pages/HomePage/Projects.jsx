@@ -24,7 +24,7 @@ function Projects() {
         </span>
       </div>
 
-      <div className="flex flex-col items-center gap-8 max-w-[80%] mx-auto bg-[var(--gray-color)] rounded-xl shadow p-6">
+      <div className="flex flex-col items-center gap-8 lg:w-[80%] w-[95%] mx-auto bg-[var(--gray-color)] rounded-xl shadow p-6">
         <Swiper
           className="w-full"
           spaceBetween={30}

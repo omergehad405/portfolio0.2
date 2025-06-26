@@ -14,6 +14,12 @@ function Header() {
   const toggleNav = () => {
     setOpenNav(!openNav);
   };
+
+  // Handler to close nav when a menu item is clicked (for mobile)
+  const handleNavItemClick = () => {
+    setOpenNav(false);
+  };
+
   return (
     <header className="h-[100px] w-full lg:px-[50px] px-2 bg-black border-b border-[#777] relative">
       <div className="lg:flex justify-between items-center gap-4 hidden">
@@ -193,6 +199,7 @@ function Header() {
           <li className="group">
             <Link
               to="/"
+              onClick={handleNavItemClick}
               className="text-2xl text-[var(--white-color)] transition-colors duration-500 group-hover:text-[var(--main-color)]"
             >
               Home
@@ -201,6 +208,7 @@ function Header() {
           <li className="group">
             <Link
               to="/about"
+              onClick={handleNavItemClick}
               className="text-2xl text-[var(--white-color)] transition-colors duration-500 group-hover:text-[var(--main-color)]"
             >
               About
@@ -209,6 +217,7 @@ function Header() {
           <li className="group">
             <Link
               to="/projects"
+              onClick={handleNavItemClick}
               className="text-2xl text-[var(--white-color)] transition-colors duration-500 group-hover:text-[var(--main-color)]"
             >
               Projects
@@ -217,6 +226,7 @@ function Header() {
           <li className="group">
             <Link
               to="/services"
+              onClick={handleNavItemClick}
               className="text-2xl text-[var(--white-color)] transition-colors duration-500 group-hover:text-[var(--main-color)]"
             >
               Services
@@ -225,6 +235,7 @@ function Header() {
           <li className="group">
             <Link
               to="/contact"
+              onClick={handleNavItemClick}
               className="text-2xl text-[var(--white-color)] transition-colors duration-500 group-hover:text-[var(--main-color)]"
             >
               Contact

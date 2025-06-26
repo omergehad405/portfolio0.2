@@ -3,11 +3,28 @@ import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { FaUpwork } from "react-icons/fa6";
 import useAppContext from "../../context/AppContext/useAppContext";
 import { PiNumberFiveBold } from "react-icons/pi";
+
 function About() {
   const [section, setSection] = useState("about");
   const sectionBtnsRef = useRef([]);
   const { skills } = useAppContext();
   let sectionBtn = sectionBtnsRef.current;
+
+  const [activeSkill, setActiveSkill] = useState(null);
+
+  const [isTouch, setIsTouch] = useState(false);
+  useEffect(() => {
+    const checkTouch = () => {
+      setIsTouch(
+        "ontouchstart" in window ||
+          navigator.maxTouchPoints > 0 ||
+          navigator.msMaxTouchPoints > 0
+      );
+    };
+    checkTouch();
+    window.addEventListener("resize", checkTouch);
+    return () => window.removeEventListener("resize", checkTouch);
+  }, []);
 
   useEffect(() => {
     const handleClick = (e) => {
@@ -31,6 +48,18 @@ function About() {
       });
     };
   });
+
+  useEffect(() => {
+    if (!isTouch || activeSkill === null) return;
+    const handleOutside = (e) => {
+      // If click is not inside any skill box, close tooltip
+      if (!e.target.closest(".skill-box")) {
+        setActiveSkill(null);
+      }
+    };
+    document.addEventListener("click", handleOutside);
+    return () => document.removeEventListener("click", handleOutside);
+  }, [isTouch, activeSkill]);
 
   return (
     <section className="py-12 px-4 md:px-16">
@@ -64,7 +93,7 @@ function About() {
         </button>
       </div>
 
-      <div className="flex flex-col md:flex-row items-center md:items-start gap-8 max-w-[80%] mx-auto bg-[var(--gray-color)] rounded-xl shadow p-6">
+      <div className="flex flex-col md:flex-row items-center md:items-start gap-8 lg:w-[80%] w-[95%] mx-auto bg-[var(--gray-color)] rounded-xl shadow p-6">
         <img
           src="./personal-info.png"
           className="w-[400px] max-w-full xl:block hidden"
@@ -84,7 +113,7 @@ function About() {
               applications.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4">
-              <div className="bg-[#2E2E2E] p-5 rounded-md w-[240px] h-[100px]">
+              <div className="bg-[#2E2E2E] p-5 rounded-md xl:w-[240px] lg:w-[40%] w-full h-[100px]">
                 <h6 className="text-lg text-[#777] capitalize font-bold mb-2">
                   email
                 </h6>
@@ -95,7 +124,7 @@ function About() {
                   omergehad593@gmail.com
                 </a>
               </div>
-              <div className="bg-[#2E2E2E] p-5 rounded-md w-[240px] h-[100px]">
+              <div className="bg-[#2E2E2E] p-5 rounded-md xl:w-[240px] lg:w-[40%] w-full h-[100px]">
                 <h6 className="text-lg text-[#777] capitalize font-bold ">
                   phone
                 </h6>
@@ -106,13 +135,13 @@ function About() {
                   +20 01061989116
                 </a>
               </div>
-              <div className="bg-[#2E2E2E] p-5 rounded-md w-[240px] h-[100px]">
+              <div className="bg-[#2E2E2E] p-5 rounded-md xl:w-[240px] lg:w-[40%] w-full h-[100px]">
                 <h6 className="text-lg text-[#777] capitalize font-bold ">
                   location
                 </h6>
                 <span className="text-white">cairo , shubra</span>
               </div>
-              <div className="bg-[#2E2E2E] p-5 rounded-md w-[240px] h-[100px] flex items-center gap-4">
+              <div className="bg-[#2E2E2E] p-5 rounded-md xl:w-[240px] lg:w-[40%] w-full h-[100px] flex items-center justify-center gap-4">
                 <a
                   target="_blank"
                   href="https://www.linkedin.com/in/omar-gehad-214302291/"
@@ -154,19 +183,40 @@ function About() {
             {skills.map((skill) => (
               <div
                 key={skill.id}
-                className="relative group flex flex-col items-center justify-center w-[150px] h-[150px] bg-[#2E2E2E] cursor-pointer overflow-visible"
+                className="relative group flex flex-col items-center justify-center w-[150px] h-[150px] bg-[#2E2E2E] cursor-pointer overflow-visible skill-box"
                 data-name={skill.dataName}
+                onClick={
+                  isTouch
+                    ? (e) => {
+                        e.stopPropagation();
+                        setActiveSkill((prev) =>
+                          prev === skill.id ? null : skill.id
+                        );
+                      }
+                    : undefined
+                }
+                onMouseLeave={
+                  isTouch
+                    ? undefined
+                    : () => {
+                        setActiveSkill(null);
+                      }
+                }
+                onMouseEnter={
+                  isTouch
+                    ? undefined
+                    : () => {
+                        setActiveSkill(skill.id);
+                      }
+                }
               >
                 {/* Tooltip */}
                 <div
-                  className="
+                  className={`
                     absolute
                     top-0
                     left-1/2
                     -translate-x-1/2
-                    opacity-0
-                    group-hover:opacity-100
-                    group-hover:-translate-y-1  
                     transition-all
                     duration-300
                     bg-[var(--main-color)]
@@ -179,7 +229,15 @@ function About() {
                     z-10
                     whitespace-nowrap
                     shadow-lg
-                  "
+                    ${
+                      isTouch
+                        ? activeSkill === skill.id
+                          ? "opacity-100 -translate-y-1"
+                          : "opacity-0"
+                        : "opacity-0 group-hover:opacity-100 group-hover:-translate-y-1"
+                    }
+                  `}
+                  style={isTouch ? { pointerEvents: "auto" } : undefined}
                 >
                   {skill.name}
                 </div>
@@ -187,7 +245,13 @@ function About() {
                 <img
                   src={skill.img}
                   alt={skill.alt}
-                  className="w-12 h-12 filter grayscale group-hover:filter-none transition-all duration-300"
+                  className={`w-12 h-12 filter grayscale transition-all duration-300 ${
+                    isTouch
+                      ? activeSkill === skill.id
+                        ? "filter-none"
+                        : ""
+                      : "group-hover:filter-none"
+                  }`}
                 />
               </div>
             ))}

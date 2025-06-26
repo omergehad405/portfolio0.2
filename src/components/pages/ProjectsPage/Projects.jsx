@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import useProjectsContext from "../../context/ProjectsContext/useProjectsContext";
 import { FaArrowRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -14,10 +14,24 @@ const FILTERS = [
   { label: "FullStack", value: "fullStack" },
 ];
 
+// Helper to detect if device is touch (mobile/tablet)
+function isTouchDevice() {
+  if (typeof window === "undefined") return false;
+  return (
+    "ontouchstart" in window ||
+    navigator.maxTouchPoints > 0 ||
+    navigator.msMaxTouchPoints > 0
+  );
+}
+
 function Projects() {
   const { projects } = useProjectsContext();
   const [selectedFilter, setSelectedFilter] = useState("all");
   const projectRefs = useRef([]);
+  const [activeIndex, setActiveIndex] = useState(null);
+
+  // For outside click detection
+  const containerRef = useRef(null);
 
   useEffect(() => {
     // Clean up previous triggers
@@ -80,7 +94,55 @@ function Projects() {
 
   useEffect(() => {
     projectRefs.current = [];
+    setActiveIndex(null); // Reset overlay when filter changes
   }, [filteredProjects]);
+
+  // Overlay logic:
+  // - On desktop: show overlay on hover (group-hover)
+  // - On touch device: show overlay only for the clicked card (activeIndex)
+  const handleCardClick = (idx) => {
+    if (isTouchDevice()) {
+      setActiveIndex((prev) => (prev === idx ? null : idx));
+    }
+  };
+
+  const handleMouseEnter = (idx) => {
+    if (!isTouchDevice()) {
+      setActiveIndex(idx);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (!isTouchDevice()) {
+      setActiveIndex(null);
+    }
+  };
+
+  // Outside click handler for overlay on touch devices
+  const handleOutsideClick = useCallback(
+    (event) => {
+      if (
+        isTouchDevice() &&
+        activeIndex !== null &&
+        containerRef.current &&
+        !containerRef.current.contains(event.target)
+      ) {
+        setActiveIndex(null);
+      }
+    },
+    [activeIndex]
+  );
+
+  useEffect(() => {
+    if (isTouchDevice() && activeIndex !== null) {
+      document.addEventListener("mousedown", handleOutsideClick);
+      document.addEventListener("touchstart", handleOutsideClick);
+      return () => {
+        document.removeEventListener("mousedown", handleOutsideClick);
+        document.removeEventListener("touchstart", handleOutsideClick);
+      };
+    }
+  }, [activeIndex, handleOutsideClick]);
 
   return (
     <section className="w-[80%] mx-auto mb-10 overflow-hidden">
@@ -117,7 +179,10 @@ function Projects() {
         ))}
       </div>
 
-      <div className="flex flex-wrap items-center gap-3">
+      <div
+        className="flex flex-wrap items-center gap-3"
+        ref={containerRef}
+      >
         {filteredProjects.length === 0 ? (
           <div className="text-white text-center w-full py-10">
             There is no projects for this category yet.
@@ -128,6 +193,10 @@ function Projects() {
               key={project.id || project.title + idx}
               ref={(el) => (projectRefs.current[idx] = el)}
               className="group relative w-[350px] mx-auto xl:w-[450px] h-[150px] xl:h-[200px] my-1 overflow-hidden flex xl:justify-between justify-center xl:gap-0 gap-2 rounded-xl shadow-xl p-2 relative opacity-0"
+              onClick={() => handleCardClick(idx)}
+              onMouseEnter={() => handleMouseEnter(idx)}
+              onMouseLeave={handleMouseLeave}
+              style={{ cursor: isTouchDevice() ? "pointer" : "default" }}
             >
               <div className="w-[150px] xl:w-[200px] h-[150px] xl:h-[200px] overflow-hidden">
                 <img src={project.image} alt={project.title} />
@@ -147,16 +216,37 @@ function Projects() {
                 </div>
               </div>
 
-              <div className="absolute top-0 right-0 hidden group-hover:block bg-black/50 w-full h-full transition-all duration-500">
-                <a
-                  href={project.live}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-white text-2xl cursor-pointer flex items-center justify-center h-full w-full"
-                >
-                  <FaArrowRight />
-                </a>
-              </div>
+              {/* Overlay logic: 
+                  - On desktop: show overlay on hover (activeIndex === idx)
+                  - On touch: show overlay only for the clicked card (activeIndex === idx)
+              */}
+              {activeIndex === idx && (
+                <div className="absolute top-0 right-0 bg-black/50 w-full h-full transition-all duration-500 flex items-center justify-center">
+                  <a
+                    href={project.live}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-white text-2xl cursor-pointer flex items-center justify-center h-full w-full"
+                    onClick={e => e.stopPropagation()}
+                  >
+                    <FaArrowRight />
+                  </a>
+                </div>
+              )}
+              {/* For desktop, also show overlay on hover using group-hover if not touch device */}
+              {!isTouchDevice() && (
+                <div className="absolute top-0 right-0 hidden group-hover:flex bg-black/50 w-full h-full transition-all duration-500 items-center justify-center">
+                  <a
+                    href={project.live}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-white text-2xl cursor-pointer flex items-center justify-center h-full w-full"
+                    onClick={e => e.stopPropagation()}
+                  >
+                    <FaArrowRight />
+                  </a>
+                </div>
+              )}
             </div>
           ))
         )}

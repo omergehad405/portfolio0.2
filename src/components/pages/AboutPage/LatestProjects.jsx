@@ -1,24 +1,55 @@
-import React from "react";
+import React, { useState } from "react";
 import useProjectsContext from "../../context/ProjectsContext/useProjectsContext";
 import { FaArrowRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 function LatestProjects() {
   const { projects } = useProjectsContext();
+  const [activeIndex, setActiveIndex] = useState(null);
+
+  // Helper to detect if device is touch (mobile/tablet)
+  const isTouchDevice = () => {
+    if (typeof window === "undefined") return false;
+    return (
+      "ontouchstart" in window ||
+      navigator.maxTouchPoints > 0 ||
+      navigator.msMaxTouchPoints > 0
+    );
+  };
+
+  // Handle click for mobile: toggle overlay for the clicked card
+  const handleCardClick = (idx) => {
+    if (isTouchDevice()) {
+      setActiveIndex((prev) => (prev === idx ? null : idx));
+    }
+  };
+
+  // Handle mouse leave for desktop: remove overlay if not on mobile
+  const handleMouseLeave = () => {
+    if (!isTouchDevice()) {
+      setActiveIndex(null);
+    }
+  };
 
   return (
-    <section className="w-[80%] mx-auto mb-10">
+    <section className="lg:w-[80%] w-[95%] mx-auto mb-10">
       <div className="relative mb-10">
         <h1 className="text-4xl font-bold border-l-5 border-[var(--main-color)] text-white capitalize pl-3">
           Latest Projects
         </h1>
       </div>
 
-      <div className="flex flex-wrap items-center gap-3">
-        {projects.slice(0, 4).map((project) => (
+      <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3">
+        {projects.slice(0, 4).map((project, idx) => (
           <div
             key={project.id}
-            className="group relative w-[350px] mx-auto xl:w-[450px] h-[150px] xl:h-[200px] my-1 overflow-hidden flex xl:justify-between justify-center xl:gap-0 gap-2 rounded-xl shadow-xl p-2 relative"
+            className="group relative w-[350px] mx-auto xl:w-[550px] h-[150px] xl:h-[200px] my-1 overflow-hidden flex xl:justify-between justify-center xl:gap-0 gap-2 rounded-xl shadow-xl p-2"
+            onClick={() => handleCardClick(idx)}
+            onMouseEnter={() => {
+              if (!isTouchDevice()) setActiveIndex(idx);
+            }}
+            onMouseLeave={handleMouseLeave}
+            style={{ cursor: isTouchDevice() ? "pointer" : "default" }}
           >
             <div className="w-[150px] xl:w-[200px] h-[150px] xl:h-[200px] overflow-hidden">
               <img src={project.image} alt={project.title} />
@@ -37,16 +68,34 @@ function LatestProjects() {
               </div>
             </div>
 
-            <div className="absolute top-0 right-0 hidden group-hover:block bg-black/50 w-full h-full transition-all duration-500">
-              <a
-                href={project.live}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white text-2xl cursor-pointer flex items-center justify-center h-full w-full"
-              >
-                <FaArrowRight />
-              </a>
-            </div>
+            {/* Overlay: show on hover (desktop) or on click (mobile) for the active card only */}
+            {activeIndex === idx && (
+              <div className="absolute top-0 right-0 bg-black/50 w-full h-full transition-all duration-500 flex items-center justify-center">
+                <a
+                  href={project.live}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white text-2xl cursor-pointer flex items-center justify-center h-full w-full"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <FaArrowRight />
+                </a>
+              </div>
+            )}
+            {/* For desktop, also show overlay on hover using group-hover */}
+            {!isTouchDevice() && (
+              <div className="absolute top-0 right-0 hidden group-hover:flex bg-black/50 w-full h-full transition-all duration-500 items-center justify-center">
+                <a
+                  href={project.live}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white text-2xl cursor-pointer flex items-center justify-center h-full w-full"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <FaArrowRight />
+                </a>
+              </div>
+            )}
           </div>
         ))}
       </div>

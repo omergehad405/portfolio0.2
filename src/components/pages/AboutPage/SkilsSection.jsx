@@ -57,7 +57,7 @@ const skils = [
 ];
 function SkilsSection() {
   return (
-    <section className="w-[80%] mx-auto mb-10">
+    <section className="lg:w-[80%] w-[95%] mx-auto mb-10">
       <div className="relative mb-10">
         <h1 className="text-4xl font-bold border-l-5 border-[var(--main-color)] text-white capitalize pl-3">
           what i do
@@ -78,11 +78,11 @@ function SkilsSection() {
         </p>
       </div>
 
-      <div className="flex flex-wrap items-center gap-3">
+      <div className="flex flex-wrap justify-center lg:justify-start items-center gap-3">
         {skils.map((skill) => (
           <div
             key={skill.id}
-            className="w-[250px] min-h-[200px] rounded-lg shadow-xl p-2"
+            className="max-w-[300px] lg:h-[200px] h-[170px] rounded-lg shadow-xl p-2"
           >
             <div className="flex items-center gap-2">
               {skill.image2 ? (

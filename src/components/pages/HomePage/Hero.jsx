@@ -7,7 +7,7 @@ function Hero() {
     window.scrollTo(0, 0);
   }, []);
   return (
-    <section className="bg-secondary h-screen relative">
+    <section className="bg-secondary lg:h-screen h-[60vh] relative">
       <div className="flex flex-col md:flex-row justify-between items-center relative w-[95%] mx-auto mt-10 md:mt-20">
         <div className="md:flex flex-col items-center gap-40 text-center hidden">
           <div className="flex items-center gap-2 rotate-90 text-white mb-5">
