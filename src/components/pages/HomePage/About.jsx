@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { FaUpwork } from "react-icons/fa6";
 import useAppContext from "../../context/AppContext/useAppContext";
+import { PiNumberFiveBold } from "react-icons/pi";
 function About() {
   const [section, setSection] = useState("about");
   const sectionBtnsRef = useRef([]);
@@ -142,7 +143,7 @@ function About() {
                   rel="noopener noreferrer"
                   className="w-[40px] h-[40px] rounded-full bg-[var(--main-color)] flex items-center justify-center text-[#666] text-[22px]"
                 >
-                  <img src="/public/khamsat.png" alt="Khamsat" />
+                  <PiNumberFiveBold />
                 </a>
               </div>
             </div>

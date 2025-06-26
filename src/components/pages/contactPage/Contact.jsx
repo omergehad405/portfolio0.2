@@ -2,6 +2,7 @@ import React from "react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { FaUpwork } from "react-icons/fa6";
 import ContactForm from "./ContactForm";
+import { PiNumberFiveBold } from "react-icons/pi";
 
 function Contact() {
   return (
@@ -55,7 +56,7 @@ function Contact() {
               rel="noopener noreferrer"
               className="w-[40px] h-[40px] rounded-full bg-[var(--main-color)] flex items-center justify-center text-[#666] text-[22px]"
             >
-              <img src="/public/khamsat.png" alt="Khamsat" />
+              <PiNumberFiveBold />
             </a>
           </div>
         </div>

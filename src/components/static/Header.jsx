@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FaArrowRight, FaBars, FaGithub, FaLinkedin } from "react-icons/fa";
 import { FaUpwork, FaXmark } from "react-icons/fa6";
+import { PiNumberFiveBold } from "react-icons/pi";
 import { Link } from "react-router-dom";
 
 function Header() {
@@ -146,7 +147,7 @@ function Header() {
                   rel="noopener noreferrer"
                   className="w-[40px] h-[40px] rounded-full bg-[var(--main-color)] flex items-center justify-center text-[#666] text-[22px]"
                 >
-                  <img src="/public/khamsat.png" alt="Khamsat" />
+                  <PiNumberFiveBold />
                 </a>
               </div>
               <div className="mt-10">
@@ -307,7 +308,7 @@ function Header() {
                   rel="noopener noreferrer"
                   className="w-[40px] h-[40px] rounded-full bg-[var(--main-color)] flex items-center justify-center text-[#666] text-[22px]"
                 >
-                  <img src="/public/khamsat.png" alt="Khamsat" />
+                  <PiNumberFiveBold />
                 </a>
               </div>
               <div className="mt-10">
