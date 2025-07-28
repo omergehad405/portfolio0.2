@@ -111,6 +111,16 @@ export const ProjectsProvider = ({ children }) => {
       live: "https://fresh-heat.vercel.app/",
       github: "https://github.com/omergehad405/FreshHeat",
     },
+    {
+      num: "11",
+      category: "website",
+      title: "Agency",
+      description: "Next.js Site Template for Agency and Portfolio",
+      stack: [{ name: "Next.js" }, { name: "tailwind" }],
+      image: "./Projects/Agency.png",
+      live: "https://agency-two-lemon.vercel.app/",
+      github: "https://github.com/omergehad405/Agency",
+    },
   ]);
 
   return (
